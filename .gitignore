@@ -1,0 +1,24 @@
+# Environment / credentials
+.env
+.env.*.local
+!.env.example
+.pgpass
+.pg_service.conf
+.pgbouncer.ini
+.my.cnf
+.mylogin.cnf
+
+# History and temporary files created by DB clients
+.psql_history
+.pgcli_history
+.mysql_history
+.sqlite_history
+
+# DB admin / tool state
+*.db-shm
+*.db-wal
+
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
