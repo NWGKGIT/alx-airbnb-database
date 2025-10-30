@@ -1,18 +1,22 @@
-# AirBnB Database Schema
+# Property Booking Database
 
-This SQL schema defines the structure for an AirBnB-like platform with the following entities:
+PostgreSQL schema for a property rental platform.
 
-- **User**: Users of the platform (guest, host, admin).
-- **Property**: Properties listed by hosts.
-- **Booking**: Bookings made by guests for properties.
-- **Payment**: Payments related to bookings.
-- **Review**: Reviews left by users for properties.
-- **Message**: Messages between users.
+## Tables
+- `users` – guests, hosts, admins  
+- `properties` – listings with details and price  
+- `bookings` – reservations with status and dates  
+- `payments` – booking payments with method and amount  
+- `reviews` – property ratings and comments  
+- `messages` – user-to-user messages  
 
-## Setup
+## Enums
+- `user_role` – guest, host, admin  
+- `booking_status` – pending, confirmed, canceled  
+- `payment_methods` – credit_card, paypal, stripe  
 
-Run the provided SQL script to create the database schema.
+## Features
+- Foreign key constraints and indexes for performance  
+- Auto timestamps for creation and updates  
+- Rating check constraint (1–5)  
 
-## License
-
-MIT License.
