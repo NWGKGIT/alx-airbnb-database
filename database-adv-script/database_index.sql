@@ -21,3 +21,12 @@ CREATE INDEX idx_reviews_user_id ON reviews(user_id);
 -- MESSAGES table
 CREATE INDEX idx_messages_sender_id ON messages(sender_id);
 CREATE INDEX idx_messages_recipient_id ON messages(recipient_id);
+
+-- Example to measure performance before/after index
+-- BEFORE index creation:
+EXPLAIN ANALYZE
+SELECT * FROM bookings WHERE start_date BETWEEN '2025-01-01' AND '2025-12-31';
+
+-- AFTER index creation:
+EXPLAIN ANALYZE
+SELECT * FROM bookings WHERE start_date BETWEEN '2025-01-01' AND '2025-12-31';
