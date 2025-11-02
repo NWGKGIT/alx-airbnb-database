@@ -1,26 +1,25 @@
---number of bookings by each user
+-- 1️ Total number of bookings made by each user
 SELECT
-    users.id,
-    COUNT(*)
-FROM
-    bookings
-    INNER JOIN users ON users.id = bookings.user_id
-GROUP BY
-    bookings.user_id
-    -- rank props based on total number of bookings
+    u.id AS user_id,
+    COUNT(b.id) AS total_bookings
+FROM users u
+JOIN bookings b ON u.id = b.user_id
+GROUP BY u.id
+ORDER BY total_bookings DESC;
+
+-- 2️ Rank properties based on total number of bookings
 SELECT
-    p.id AS property_id,
-    p.name AS property_name,
-    COUNT(b.id) AS total_bookings,
-    ROW_NUMBER() OVER (
-        ORDER BY
-            COUNT(b.id) DESC
-    ) AS booking_rank
-FROM
-    properties p
+    property_id,
+    property_name,
+    total_bookings,
+    RANK() OVER (ORDER BY total_bookings DESC) AS booking_rank
+FROM (
+    SELECT
+        p.id AS property_id,
+        p.name AS property_name,
+        COUNT(b.id) AS total_bookings
+    FROM properties p
     LEFT JOIN bookings b ON p.id = b.property_id
-GROUP BY
-    p.id,
-    p.name
-ORDER BY
-    booking_rank;
+    GROUP BY p.id, p.name
+) AS property_booking_counts
+ORDER BY booking_rank;
